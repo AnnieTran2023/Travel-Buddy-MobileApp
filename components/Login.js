@@ -3,17 +3,17 @@ import React from "react";
 import { useFonts } from "expo-font";
 import { Button } from "react-native-paper";
 
-export default function Login() {
+export default function Login({ navigation }) {
   let [fontsLoaded] = useFonts({
     "Outfit-Regular": require("./../assets/fonts/Outfit-Regular.ttf"),
     "Outfit-Bold": require("./../assets/fonts/Outfit-Bold.ttf"),
   });
 
   return (
-    <View style={styles.container}>
+    <View>
       <Image
         source={require("./../assets/login.jpg")}
-        style={{ width: 400, height: 450 }}
+        style={{ width: 400, height: 500 }}
       />
       <View style={styles.login}>
         <Text style={styles.title}>Travel Buddy</Text>
@@ -27,11 +27,11 @@ export default function Login() {
             mode="contained"
             buttonColor="black"
             textColor="white"
-            icon="google"
             labelStyle={styles.buttonText}
             contentStyle={styles.buttonContent}
+            onPress={() => navigation.navigate("SignIn")}
           >
-            Sign in with Google
+            Get started!
           </Button>
         </View>
       </View>
@@ -40,9 +40,6 @@ export default function Login() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingTop: 60,
-  },
   title: {
     fontFamily: "Outfit-Bold",
     fontSize: 30,
@@ -70,5 +67,6 @@ const styles = StyleSheet.create({
   },
   buttonContent: {
     height: 50,
+    width: 350,
   },
 });
