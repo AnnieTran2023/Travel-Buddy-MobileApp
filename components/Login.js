@@ -12,8 +12,9 @@ export default function Login({ navigation }) {
   return (
     <View>
       <Image
-        source={require("./../assets/login.jpg")}
-        style={{ width: 400, height: 500 }}
+        source={require("./../assets/airplane.jpg")}
+        style={{ width: 400, height: 550, alignSelf: "flex-end" }}
+        resizeMode="cover"
       />
       <View style={styles.login}>
         <Text style={styles.title}>Travel Buddy</Text>
@@ -67,6 +68,6 @@ const styles = StyleSheet.create({
   },
   buttonContent: {
     height: 50,
-    width: 350,
+    width: 330,
   },
 });

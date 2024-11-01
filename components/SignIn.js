@@ -1,9 +1,13 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import React, { useState } from "react";
 import { useFonts } from "expo-font";
-import { TextInput, Provider as PaperProvider } from "react-native-paper";
+import {
+  TextInput,
+  Provider as PaperProvider,
+  Button,
+} from "react-native-paper";
 
-export default function SignIn() {
+export default function SignIn({ navigation }) {
   let [fontsLoaded] = useFonts({
     "Outfit-Regular": require("./../assets/fonts/Outfit-Regular.ttf"),
     "Outfit-Bold": require("./../assets/fonts/Outfit-Bold.ttf"),
@@ -19,14 +23,15 @@ export default function SignIn() {
       background: "white",
       placeholder: "grey",
       primary: "black",
+      outline: "grey",
     },
   };
 
   return (
-    <PaperProvider>
+    <PaperProvider theme={theme}>
       <View style={styles.container}>
-        <Text style={styles.title}>Sign in</Text>
-        <Text style={styles.text}>Good to see you again!</Text>
+        <Text style={styles.title}>Sign In</Text>
+        <Text style={styles.text}>Great to see you again!</Text>
         <View>
           <TextInput
             mode="outlined"
@@ -52,6 +57,34 @@ export default function SignIn() {
             theme={theme}
           />
         </View>
+        <View>
+          <Button
+            mode="contained"
+            buttonColor="black"
+            textColor="white"
+            labelStyle={styles.buttonText}
+            contentStyle={styles.buttonContent}
+            style={styles.button}
+          >
+            Sign in
+          </Button>
+          <Text style={styles.signupText}>
+            Don't have an account?{" "}
+            <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+              <Text style={styles.signupLink}>Sign Up</Text>
+            </TouchableOpacity>
+          </Text>
+        </View>
+        <Image
+          source={require("./../assets/bear.png")}
+          style={{
+            width: 400,
+            height: 150,
+            alignSelf: "center",
+            marginTop: 20,
+          }}
+          resizeMode="contain"
+        />
       </View>
     </PaperProvider>
   );
@@ -66,8 +99,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     height: "100%",
-    padding: 30,
-    marginTop: 40,
+    paddingTop: 120,
+    padding: 20,
   },
   text: {
     fontFamily: "Outfit-Regular",
@@ -80,5 +113,31 @@ const styles = StyleSheet.create({
   input: {
     marginBottom: 20,
     height: 70,
+  },
+  buttonText: {
+    fontFamily: "Outfit-Regular",
+    fontSize: 18,
+  },
+  buttonContent: {
+    height: 50,
+  },
+  button: {
+    marginTop: 20,
+    width: 350,
+    alignSelf: "center",
+  },
+  signupText: {
+    fontFamily: "Outfit-Regular",
+    fontSize: 16,
+    color: "grey",
+    textAlign: "center",
+    marginTop: 20,
+  },
+  signupLink: {
+    fontFamily: "Outfit-Bold",
+    fontSize: 16,
+    top: 3,
+    color: "#3d348b",
+    textDecorationLine: "underline",
   },
 });
