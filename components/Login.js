@@ -2,12 +2,21 @@ import { View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
 import { useFonts } from "expo-font";
 import { Button } from "react-native-paper";
+import { useEffect } from "react";
+import { auth } from "./../configs/FirebaseConfig";
 
 export default function Login({ navigation }) {
   let [fontsLoaded] = useFonts({
     "Outfit-Regular": require("./../assets/fonts/Outfit-Regular.ttf"),
     "Outfit-Bold": require("./../assets/fonts/Outfit-Bold.ttf"),
   });
+
+  useEffect(() => {
+    const user = auth.currentUser;
+    if (user) {
+      navigation.navigate("Authenticated");
+    }
+  }, []);
 
   return (
     <View>

@@ -6,6 +6,10 @@ import {
   Provider as PaperProvider,
   Button,
 } from "react-native-paper";
+import Toast from "react-native-toast-message";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "./../configs/FirebaseConfig";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function SignIn({ navigation }) {
   let [fontsLoaded] = useFonts({
@@ -13,7 +17,7 @@ export default function SignIn({ navigation }) {
     "Outfit-Bold": require("./../assets/fonts/Outfit-Bold.ttf"),
   });
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -27,6 +31,45 @@ export default function SignIn({ navigation }) {
     },
   };
 
+  // Clear the fields when the component mounts
+  useFocusEffect(
+    React.useCallback(() => {
+      setEmail("");
+      setPassword("");
+    }, [])
+  );
+
+  const signIn = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        Toast.show({
+          type: "success",
+          text1: `Welcome back ${user.displayName}`,
+          visibilityTime: 2000,
+        });
+        navigation.navigate("Authenticated");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        if (errorCode === "auth/invalid-credential") {
+          Toast.show({
+            type: "error",
+            text1: "Invalid email or password!",
+          });
+        } else {
+          Toast.show({
+            type: "error",
+            text1: errorMessage,
+          });
+        }
+      });
+  };
+
   return (
     <PaperProvider theme={theme}>
       <View style={styles.container}>
@@ -35,9 +78,9 @@ export default function SignIn({ navigation }) {
         <View>
           <TextInput
             mode="outlined"
-            label="Username"
-            value={username}
-            onChangeText={(username) => setUsername(username)}
+            label="Email"
+            value={email}
+            onChangeText={(email) => setEmail(email)}
             style={styles.input}
             theme={theme}
           />
@@ -65,6 +108,7 @@ export default function SignIn({ navigation }) {
             labelStyle={styles.buttonText}
             contentStyle={styles.buttonContent}
             style={styles.button}
+            onPress={signIn}
           >
             Sign in
           </Button>
