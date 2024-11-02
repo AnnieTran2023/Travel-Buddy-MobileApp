@@ -5,17 +5,12 @@ import {
   Provider as PaperProvider,
   Button,
 } from "react-native-paper";
-import { useFonts } from "expo-font";
 import Toast from "react-native-toast-message";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "./../configs/FirebaseConfig";
+import AppStyles from "./AppStyles";
 
 export default function SignUp({ navigation }) {
-  let [fontsLoaded] = useFonts({
-    "Outfit-Regular": require("./../assets/fonts/Outfit-Regular.ttf"),
-    "Outfit-Bold": require("./../assets/fonts/Outfit-Bold.ttf"),
-  });
-
   const theme = {
     colors: {
       text: "black",
@@ -92,14 +87,14 @@ export default function SignUp({ navigation }) {
   return (
     <PaperProvider theme={theme}>
       <View style={styles.container}>
-        <Text style={styles.title}>Create an account</Text>
+        <Text style={AppStyles.title}>Create an account</Text>
         <View>
           <TextInput
             mode="outlined"
             label="Name"
             value={name}
             onChangeText={(name) => setName(name)}
-            style={styles.input}
+            style={AppStyles.input}
             theme={theme}
           />
           <TextInput
@@ -107,7 +102,7 @@ export default function SignUp({ navigation }) {
             label="Email"
             value={email}
             onChangeText={(email) => setEmail(email)}
-            style={styles.input}
+            style={AppStyles.input}
             theme={theme}
           />
           <TextInput
@@ -116,7 +111,7 @@ export default function SignUp({ navigation }) {
             value={password}
             onChangeText={(password) => setPassword(password)}
             secureTextEntry
-            style={styles.input}
+            style={AppStyles.input}
             theme={theme}
           />
           <TextInput
@@ -127,7 +122,7 @@ export default function SignUp({ navigation }) {
               setConfirmPassword(confirmPassword)
             }
             secureTextEntry
-            style={styles.input}
+            style={AppStyles.input}
             theme={theme}
           />
         </View>
@@ -135,9 +130,9 @@ export default function SignUp({ navigation }) {
           mode="contained"
           buttonColor="black"
           textColor="white"
-          labelStyle={styles.buttonText}
-          contentStyle={styles.buttonContent}
-          style={styles.button}
+          labelStyle={AppStyles.buttonText}
+          contentStyle={AppStyles.buttonContent}
+          style={AppStyles.button}
           onPress={createAccount}
         >
           Create Account
@@ -165,27 +160,9 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     height: "100%",
   },
-  title: {
-    fontFamily: "Outfit-Bold",
-    fontSize: 30,
-    textAlign: "center",
-    marginBottom: 20,
-  },
   input: {
     marginBottom: 20,
     height: 70,
-  },
-  buttonText: {
-    fontFamily: "Outfit-Regular",
-    fontSize: 18,
-  },
-  buttonContent: {
-    height: 50,
-  },
-  button: {
-    marginTop: 20,
-    width: 330,
-    alignSelf: "center",
   },
   signInButtonText: {
     fontFamily: "Outfit-Regular",
@@ -199,7 +176,7 @@ const styles = StyleSheet.create({
   },
   signInButton: {
     marginTop: 20,
-    width: 330,
+    width: 350,
     alignSelf: "center",
     borderColor: "black",
   },

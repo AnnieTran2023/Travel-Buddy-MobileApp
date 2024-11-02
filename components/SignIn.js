@@ -1,6 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import React, { useState } from "react";
-import { useFonts } from "expo-font";
 import {
   TextInput,
   Provider as PaperProvider,
@@ -10,13 +9,9 @@ import Toast from "react-native-toast-message";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./../configs/FirebaseConfig";
 import { useFocusEffect } from "@react-navigation/native";
+import AppStyles from "./AppStyles";
 
 export default function SignIn({ navigation }) {
-  let [fontsLoaded] = useFonts({
-    "Outfit-Regular": require("./../assets/fonts/Outfit-Regular.ttf"),
-    "Outfit-Bold": require("./../assets/fonts/Outfit-Bold.ttf"),
-  });
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -73,15 +68,15 @@ export default function SignIn({ navigation }) {
   return (
     <PaperProvider theme={theme}>
       <View style={styles.container}>
-        <Text style={styles.title}>Sign In</Text>
-        <Text style={styles.text}>Great to see you again!</Text>
+        <Text style={AppStyles.title}>Sign In</Text>
+        <Text style={AppStyles.text}>Great to see you again!</Text>
         <View>
           <TextInput
             mode="outlined"
             label="Email"
             value={email}
             onChangeText={(email) => setEmail(email)}
-            style={styles.input}
+            style={AppStyles.input}
             theme={theme}
           />
           <TextInput
@@ -96,7 +91,7 @@ export default function SignIn({ navigation }) {
                 onPress={() => setPasswordVisible(!passwordVisible)}
               />
             }
-            style={styles.input}
+            style={AppStyles.input}
             theme={theme}
           />
         </View>
@@ -105,9 +100,9 @@ export default function SignIn({ navigation }) {
             mode="contained"
             buttonColor="black"
             textColor="white"
-            labelStyle={styles.buttonText}
-            contentStyle={styles.buttonContent}
-            style={styles.button}
+            labelStyle={AppStyles.buttonText}
+            contentStyle={AppStyles.buttonContent}
+            style={AppStyles.button}
             onPress={signIn}
           >
             Sign in
@@ -135,40 +130,11 @@ export default function SignIn({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  title: {
-    fontFamily: "Outfit-Bold",
-    fontSize: 30,
-    textAlign: "center",
-  },
   container: {
     backgroundColor: "white",
     height: "100%",
     paddingTop: 120,
     padding: 20,
-  },
-  text: {
-    fontFamily: "Outfit-Regular",
-    fontSize: 20,
-    color: "grey",
-    textAlign: "center",
-    padding: 10,
-    marginBottom: 20,
-  },
-  input: {
-    marginBottom: 20,
-    height: 70,
-  },
-  buttonText: {
-    fontFamily: "Outfit-Regular",
-    fontSize: 18,
-  },
-  buttonContent: {
-    height: 50,
-  },
-  button: {
-    marginTop: 20,
-    width: 350,
-    alignSelf: "center",
   },
   signupText: {
     fontFamily: "Outfit-Regular",
@@ -181,7 +147,7 @@ const styles = StyleSheet.create({
     fontFamily: "Outfit-Bold",
     fontSize: 16,
     top: 3,
-    color: "#3d348b",
+    color: "#f72585",
     textDecorationLine: "underline",
   },
 });
