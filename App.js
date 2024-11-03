@@ -16,6 +16,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import SearchPlaces from "./components/create-trips/SearchPlaces";
+import "react-native-get-random-values";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -109,7 +110,7 @@ const App = () => {
           options={{
             headerShown: true,
             headerTransparent: true,
-            headerTitle: "Search",
+            headerTitle: "",
             headerBackTitle: "Back",
           }}
         />
