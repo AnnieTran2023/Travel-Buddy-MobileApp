@@ -19,6 +19,8 @@ import SearchPlaces from "./components/create-trips/SearchPlaces";
 import "react-native-get-random-values";
 import { useState } from "react";
 import TripContext from "./components/create-trips/TripContext";
+import SelectCompanions from "./components/create-trips/SelectCompanions";
+import SelectDate from "./components/create-trips/SelectDate";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -112,6 +114,26 @@ const App = () => {
           <Stack.Screen
             name="SearchPlaces"
             component={SearchPlaces}
+            options={{
+              headerShown: true,
+              headerTransparent: true,
+              headerTitle: "",
+              headerBackTitle: "Back",
+            }}
+          />
+          <Stack.Screen
+            name="SelectCompanions"
+            component={SelectCompanions}
+            options={{
+              headerShown: true,
+              headerTransparent: true,
+              headerTitle: "",
+              headerBackTitle: "Back",
+            }}
+          />
+          <Stack.Screen
+            name="SelectDate"
+            component={SelectDate}
             options={{
               headerShown: true,
               headerTransparent: true,

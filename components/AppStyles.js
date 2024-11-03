@@ -12,12 +12,22 @@ const AppStyles = StyleSheet.create({
     fontSize: 30,
     marginBottom: 20,
   },
+  smallTitle: {
+    fontFamily: "Outfit-Medium",
+    fontSize: 19,
+    marginBottom: 10,
+  },
   text: {
     fontFamily: "Outfit-Regular",
     fontSize: 20,
     color: "grey",
     textAlign: "center",
     marginBottom: 20,
+  },
+  smallText: {
+    fontFamily: "Outfit-Regular",
+    fontSize: 16,
+    color: "grey",
   },
   input: {
     marginBottom: 20,

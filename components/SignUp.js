@@ -66,7 +66,8 @@ export default function SignUp({ navigation }) {
         console.log(user);
         Toast.show({
           type: "success",
-          text1: "Account created successfully!",
+          text1: "🎉 Woohoo! Your account is ready! 🎉",
+          text2: "Let’s log in to start your amazing adventures!",
           visibilityTime: 2000,
         });
         setTimeout(() => {

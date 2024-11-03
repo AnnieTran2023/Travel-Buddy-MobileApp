@@ -13,7 +13,7 @@ export default function Login({ navigation }) {
   }, []);
 
   return (
-    <View>
+    <View styles={{ height: "100%" }}>
       <Image
         source={require("./../assets/airplane.jpg")}
         style={{ width: 400, height: 550, alignSelf: "flex-end" }}
