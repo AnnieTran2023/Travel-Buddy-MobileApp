@@ -17,6 +17,8 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import SearchPlaces from "./components/create-trips/SearchPlaces";
 import "react-native-get-random-values";
+import { useState } from "react";
+import TripContext from "./components/create-trips/TripContext";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -81,42 +83,46 @@ const App = () => {
     );
   }
 
+  const [tripDetails, setTripDetails] = useState([]);
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="SignIn"
-          component={SignIn}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="SignUp"
-          component={SignUp}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Authenticated"
-          component={AuthenticatedTabs}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="SearchPlaces"
-          component={SearchPlaces}
-          options={{
-            headerShown: true,
-            headerTransparent: true,
-            headerTitle: "",
-            headerBackTitle: "Back",
-          }}
-        />
-      </Stack.Navigator>
-      <Toast />
-    </NavigationContainer>
+    <TripContext.Provider value={{ tripDetails, setTripDetails }}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SignIn"
+            component={SignIn}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SignUp"
+            component={SignUp}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Authenticated"
+            component={AuthenticatedTabs}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SearchPlaces"
+            component={SearchPlaces}
+            options={{
+              headerShown: true,
+              headerTransparent: true,
+              headerTitle: "",
+              headerBackTitle: "Back",
+            }}
+          />
+        </Stack.Navigator>
+        <Toast />
+      </NavigationContainer>
+    </TripContext.Provider>
   );
 };
 
