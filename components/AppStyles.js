@@ -45,6 +45,30 @@ const AppStyles = StyleSheet.create({
     width: 350,
     alignSelf: "center",
   },
+  optionsContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  surface: {
+    padding: 14,
+    backgroundColor: "#f5f5f5",
+    marginBottom: 20,
+    borderRadius: 8,
+    width: 330,
+  },
+  optionContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  textContainer: {
+    flex: 1,
+    marginRight: 10,
+  },
+  icon: {
+    width: 60,
+    height: 60,
+  },
 });
 
 export default AppStyles;

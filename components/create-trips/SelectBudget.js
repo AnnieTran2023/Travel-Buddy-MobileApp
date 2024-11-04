@@ -1,40 +1,30 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
-import AppStyles from "../AppStyles";
 import { ProgressBar, Surface } from "react-native-paper";
-import LottieView from "lottie-react-native";
+import AppStyles from "../AppStyles";
 import { useContext, useState } from "react";
 import TripContext from "./TripContext";
+import LottieView from "lottie-react-native";
 
-export default function SelectCompanions({ navigation }) {
+export default function SelectBudget() {
   const options = [
     {
       id: 1,
-      name: "Just me",
-      description: "Just me, myself, and I ",
-      icon: "https://lottie.host/87b71244-56f1-4115-b6a3-3259e97cb4ff/GOHtdrYNAr.json",
-      people: "1",
+      name: "Budget-Friendly",
+      description: "Keeping it light on the wallet",
+      icon: "https://lottie.host/d0343cad-63a4-4ee7-ae97-2cf2aac4fa93/7LmN4ITvoq.json",
     },
     {
       id: 2,
-      name: "Best Buddies",
-      description: "The more, the merrier",
-      icon: "https://lottie.host/d721f27f-f19b-482d-a851-d415d2fbfe80/0P3xIkDqEL.json",
-      people: "3-10",
+      name: "Balanced",
+      description: "A mix of comfort and value",
+      icon: "https://lottie.host/8b6f66df-522b-47f5-9734-beea418e56f8/M5qcnfy0N3.json",
     },
     {
       id: 3,
-      name: "Lovebirds",
-      description: "Romantic getaway for two",
-      icon: "https://lottie.host/273cbfe3-b304-4c31-90e0-d5ddc727f9c8/mpvW9NJieb.json",
-      people: "2",
-    },
-    {
-      id: 4,
-      name: "Family Crew",
-      description: "Family fun for everyone",
-      icon: "https://lottie.host/f5dc9d85-6f1b-4da5-b068-e07e7105ada6/NCZ0A8gyhr.json",
-      people: "3-10",
+      name: "Luxurious",
+      description: "Go all out with the best",
+      icon: "https://lottie.host/51a01f23-c9dc-40a9-a7a9-a9530c460bb7/gjW0IxVs2Q.json",
     },
   ];
 
@@ -43,15 +33,9 @@ export default function SelectCompanions({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <ProgressBar
-        progress={0.5}
-        color="#6200b3"
-        style={{ marginBottom: 20 }}
-      />
-      <Text style={AppStyles.title}>Who's Coming Along?</Text>
-      <Text style={AppStyles.text}>
-        Is it a solo trip, or are we gathering the gang?
-      </Text>
+      <ProgressBar progress={1} color="#6200b3" style={{ marginBottom: 20 }} />
+      <Text style={AppStyles.title}>How fancy are we?</Text>
+      <Text style={AppStyles.text}>Low-key budget or treat-yourself mode?</Text>
       <View style={AppStyles.optionsContainer}>
         {options.map((option) => (
           <TouchableOpacity
@@ -59,8 +43,8 @@ export default function SelectCompanions({ navigation }) {
             activeOpacity={0.5}
             onPress={() => {
               setSelectedOptionId(option.id);
-              setTripDetails({ ...tripDetails, companions: option });
-              navigation.navigate("SelectDate");
+              setTripDetails({ ...tripDetails, budget: option });
+              console.log(tripDetails);
             }}
           >
             <Surface

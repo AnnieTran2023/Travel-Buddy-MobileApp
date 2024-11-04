@@ -21,6 +21,7 @@ import { useState } from "react";
 import TripContext from "./components/create-trips/TripContext";
 import SelectCompanions from "./components/create-trips/SelectCompanions";
 import SelectDate from "./components/create-trips/SelectDate";
+import SelectBudget from "./components/create-trips/SelectBudget";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -29,8 +30,8 @@ function AuthenticatedTabs() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: "#6200b3",
-        tabBarInactiveTintColor: "#595959",
+        tabBarActiveTintColor: "black",
+        tabBarInactiveTintColor: "#a7a7a7",
         headerShown: false,
       }}
     >
@@ -133,6 +134,16 @@ const App = () => {
           <Stack.Screen
             name="SelectDate"
             component={SelectDate}
+            options={{
+              headerShown: true,
+              headerTransparent: true,
+              headerTitle: "",
+              headerBackTitle: "Back",
+            }}
+          />
+          <Stack.Screen
+            name="SelectBudget"
+            component={SelectBudget}
             options={{
               headerShown: true,
               headerTransparent: true,

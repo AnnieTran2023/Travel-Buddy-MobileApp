@@ -1,14 +1,45 @@
 import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { ProgressBar } from "react-native-paper";
 import AppStyles from "../AppStyles";
 import { useContext } from "react";
 import TripContext from "./TripContext";
 import CalendarPicker from "react-native-calendar-picker";
+import { Button } from "react-native-paper";
+import moment from "moment";
+import Toast from "react-native-toast-message";
 
-export default function SelectDate() {
+export default function SelectDate({ navigation }) {
   const { tripDetails, setTripDetails } = useContext(TripContext);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
+  const onDateChange = (date, type) => {
+    console.log(date, type);
+    if (type === "START_DATE") {
+      setStartDate(date);
+    } else if (type === "END_DATE") {
+      setEndDate(date);
+    }
+  };
+
+  const dateSelectedContinue = () => {
+    if (startDate && endDate) {
+      const duration = moment(endDate).diff(moment(startDate), "days");
+      setTripDetails({
+        ...tripDetails,
+        startDate: startDate,
+        endDate: endDate,
+        duration: duration + 1,
+      });
+      navigation.navigate("SelectBudget");
+    } else {
+      Toast.show({
+        type: "error",
+        text1: "Please select a start and end date!",
+      });
+    }
+  };
   return (
     <View style={styles.container}>
       <ProgressBar
@@ -20,14 +51,25 @@ export default function SelectDate() {
       <Text style={AppStyles.text}>
         Share your dates so we can pack our bags and hit the road!
       </Text>
-      <View style={{ marginTop: 0 }}>
+      <View style={{ marginTop: 20 }}>
         <CalendarPicker
-          onDateChange={this.onDateChange}
+          onDateChange={onDateChange}
           allowRangeSelection={true}
           minDate={new Date()}
           maxRangeDuration={10}
-          selectedRangeStyle={{ backgroundColor: "#dec8ff" }}
+          selectedRangeStyle={{ backgroundColor: "#e5daff" }}
         />
+        <Button
+          mode="contained"
+          buttonColor="black"
+          textColor="white"
+          labelStyle={AppStyles.buttonText}
+          contentStyle={AppStyles.buttonContent}
+          style={AppStyles.button}
+          onPress={dateSelectedContinue}
+        >
+          Continue
+        </Button>
       </View>
     </View>
   );
