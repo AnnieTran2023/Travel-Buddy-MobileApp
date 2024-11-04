@@ -43,7 +43,7 @@ export default function SelectDate({ navigation }) {
   return (
     <View style={styles.container}>
       <ProgressBar
-        progress={0.75}
+        progress={0.6}
         color="#6200b3"
         style={{ marginBottom: 20 }}
       />

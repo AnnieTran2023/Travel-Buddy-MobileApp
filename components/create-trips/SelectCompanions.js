@@ -56,7 +56,7 @@ export default function SelectCompanions({ navigation }) {
         {options.map((option) => (
           <TouchableOpacity
             key={option.id}
-            activeOpacity={0.5}
+            activeOpacity={0.4}
             onPress={() => {
               setSelectedOptionId(option.id);
               setTripDetails({ ...tripDetails, companions: option });

@@ -51,7 +51,6 @@ const AppStyles = StyleSheet.create({
   },
   surface: {
     padding: 14,
-    backgroundColor: "#f5f5f5",
     marginBottom: 20,
     borderRadius: 8,
     width: 330,

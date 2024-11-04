@@ -13,10 +13,10 @@ export default function Login({ navigation }) {
   }, []);
 
   return (
-    <View styles={{ height: "100%" }}>
+    <View style={{ flex: 1, height: "100%" }}>
       <Image
         source={require("./../assets/airplane.jpg")}
-        style={{ width: 400, height: 550, alignSelf: "flex-end" }}
+        style={{ width: "100%", height: 570, alignSelf: "flex-end" }}
         resizeMode="cover"
       />
       <View style={styles.login}>
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     alignItems: "center",
+    flex: 1,
   },
   text: {
     fontFamily: "Outfit-Regular",

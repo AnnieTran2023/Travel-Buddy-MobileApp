@@ -18,7 +18,7 @@ export default function SearchPlaces({ navigation }) {
   return (
     <View style={styles.container}>
       <ProgressBar
-        progress={0.25}
+        progress={0.2}
         color="#6200b3"
         style={{ marginBottom: 20 }}
       />

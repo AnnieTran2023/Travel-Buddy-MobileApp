@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import TripContext from "./TripContext";
 import LottieView from "lottie-react-native";
 
-export default function SelectBudget() {
+export default function SelectBudget({ navigation }) {
   const options = [
     {
       id: 1,
@@ -33,7 +33,11 @@ export default function SelectBudget() {
 
   return (
     <View style={styles.container}>
-      <ProgressBar progress={1} color="#6200b3" style={{ marginBottom: 20 }} />
+      <ProgressBar
+        progress={0.8}
+        color="#6200b3"
+        style={{ marginBottom: 20 }}
+      />
       <Text style={AppStyles.title}>How fancy are we?</Text>
       <Text style={AppStyles.text}>Low-key budget or treat-yourself mode?</Text>
       <View style={AppStyles.optionsContainer}>
@@ -45,6 +49,7 @@ export default function SelectBudget() {
               setSelectedOptionId(option.id);
               setTripDetails({ ...tripDetails, budget: option });
               console.log(tripDetails);
+              navigation.navigate("ReviewTrip");
             }}
           >
             <Surface

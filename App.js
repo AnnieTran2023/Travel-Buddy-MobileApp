@@ -22,6 +22,8 @@ import TripContext from "./components/create-trips/TripContext";
 import SelectCompanions from "./components/create-trips/SelectCompanions";
 import SelectDate from "./components/create-trips/SelectDate";
 import SelectBudget from "./components/create-trips/SelectBudget";
+import ReviewTrip from "./components/create-trips/ReviewTrip";
+import BuildTrip from "./components/create-trips/BuildTrip";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -150,6 +152,21 @@ const App = () => {
               headerTitle: "",
               headerBackTitle: "Back",
             }}
+          />
+          <Stack.Screen
+            name="ReviewTrip"
+            component={ReviewTrip}
+            options={{
+              headerShown: true,
+              headerTransparent: true,
+              headerTitle: "",
+              headerBackTitle: "Back",
+            }}
+          />
+          <Stack.Screen
+            name="BuildTrip"
+            component={BuildTrip}
+            options={{ headerShown: false }}
           />
         </Stack.Navigator>
         <Toast />
