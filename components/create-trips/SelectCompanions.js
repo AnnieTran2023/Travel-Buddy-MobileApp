@@ -3,7 +3,7 @@ import React from "react";
 import AppStyles from "../AppStyles";
 import { ProgressBar, Surface } from "react-native-paper";
 import LottieView from "lottie-react-native";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import TripContext from "./TripContext";
 
 export default function SelectCompanions({ navigation }) {
@@ -39,12 +39,13 @@ export default function SelectCompanions({ navigation }) {
   ];
 
   const { tripDetails, setTripDetails } = useContext(TripContext);
+  const [selectedOptionId, setSelectedOptionId] = useState(null);
 
   return (
     <View style={styles.container}>
       <ProgressBar
         progress={0.5}
-        color="#f72585"
+        color="#6200b3"
         style={{ marginBottom: 20 }}
       />
       <Text style={AppStyles.title}>Who's Coming Along?</Text>
@@ -57,11 +58,22 @@ export default function SelectCompanions({ navigation }) {
             key={option.id}
             activeOpacity={0.5}
             onPress={() => {
+              setSelectedOptionId(option.id);
               setTripDetails({ ...tripDetails, companions: option });
               navigation.navigate("SelectDate");
             }}
           >
-            <Surface key={option.id} style={styles.surface} elevation={3}>
+            <Surface
+              key={option.id}
+              style={[
+                styles.surface,
+                selectedOptionId === option.id && {
+                  borderColor: "#6200b3",
+                  borderWidth: 2,
+                },
+              ]}
+              elevation={3}
+            >
               <View style={styles.optionContainer}>
                 <View style={styles.textContainer}>
                   <Text style={AppStyles.smallTitle}>{option.name}</Text>
@@ -94,7 +106,7 @@ const styles = StyleSheet.create({
   },
   surface: {
     padding: 16,
-    backgroundColor: "#f8edeb",
+    backgroundColor: "#f4f1ff",
     marginBottom: 18,
     borderRadius: 8,
     width: 320,

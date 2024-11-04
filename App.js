@@ -29,7 +29,7 @@ function AuthenticatedTabs() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: "#f72585",
+        tabBarActiveTintColor: "#6200b3",
         tabBarInactiveTintColor: "#595959",
         headerShown: false,
       }}

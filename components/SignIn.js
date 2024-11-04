@@ -10,6 +10,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./../configs/FirebaseConfig";
 import { useFocusEffect } from "@react-navigation/native";
 import AppStyles from "./AppStyles";
+import LottieView from "lottie-react-native";
 
 export default function SignIn({ navigation }) {
   const [email, setEmail] = useState("");
@@ -114,15 +115,13 @@ export default function SignIn({ navigation }) {
             </TouchableOpacity>
           </Text>
         </View>
-        <Image
-          source={require("./../assets/bear.png")}
-          style={{
-            width: 400,
-            height: 150,
-            alignSelf: "center",
-            marginTop: 20,
+        <LottieView
+          source={{
+            uri: "https://lottie.host/b1cb058a-b998-44ea-8c6f-4674f49a1337/rSmsrglLfN.json",
           }}
-          resizeMode="contain"
+          style={styles.icon}
+          autoPlay
+          loop
         />
       </View>
     </PaperProvider>
@@ -147,7 +146,13 @@ const styles = StyleSheet.create({
     fontFamily: "Outfit-Bold",
     fontSize: 16,
     top: 3,
-    color: "#f72585",
+    color: "#6200b3",
     textDecorationLine: "underline",
+  },
+  icon: {
+    width: 250,
+    height: 250,
+    alignSelf: "center",
+    marginTop: 20,
   },
 });
