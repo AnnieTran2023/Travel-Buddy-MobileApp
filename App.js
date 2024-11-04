@@ -76,16 +76,15 @@ const App = () => {
     "Outfit-Bold": require("./assets/fonts/Outfit-Bold.ttf"),
   });
 
+  const [tripDetails, setTripDetails] = useState([]);
+
   if (!fontsLoaded) {
-    // Show an ActivityIndicator until fonts are loaded
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <ActivityIndicator size="large" color="#0000ff" />
       </View>
     );
   }
-
-  const [tripDetails, setTripDetails] = useState([]);
 
   return (
     <TripContext.Provider value={{ tripDetails, setTripDetails }}>

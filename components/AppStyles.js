@@ -22,7 +22,7 @@ const AppStyles = StyleSheet.create({
     fontSize: 20,
     color: "grey",
     textAlign: "center",
-    marginBottom: 20,
+    marginBottom: 15,
   },
   smallText: {
     fontFamily: "Outfit-Regular",

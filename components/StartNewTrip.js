@@ -1,20 +1,19 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import AppStyles from "./AppStyles";
 import { Button } from "react-native-paper";
+import LottieView from "lottie-react-native";
 
 export default function StartNewTrip({ navigation }) {
   return (
     <View>
-      <Image
-        source={require("./../assets/pink-luggage.jpg")}
-        style={{
-          width: 400,
-          height: 170,
-          alignSelf: "center",
-          marginBottom: 20,
+      <LottieView
+        source={{
+          uri: "https://lottie.host/e0564133-86a7-460a-8fe4-2c3a2360b195/N3zi3IBDQC.json",
         }}
-        resizeMode="contain"
+        style={styles.icon}
+        autoPlay
+        loop
       />
       <Text style={AppStyles.text}>
         It looks like you don’t have any planned trips yet. Start exploring and
@@ -34,3 +33,12 @@ export default function StartNewTrip({ navigation }) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  icon: {
+    width: 250,
+    height: 250,
+    alignSelf: "center",
+    marginBottom: 23,
+  },
+});

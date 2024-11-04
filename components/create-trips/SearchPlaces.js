@@ -24,7 +24,7 @@ export default function SearchPlaces({ navigation }) {
       />
       <Text style={AppStyles.title}>Ready to explore?</Text>
       <Text style={AppStyles.text}>
-        Pick a place, and Travel Buddy’ll handle the magic! 🧳✨
+        Pick a place, and Travel Buddy’ll handle the magic!
       </Text>
       <GooglePlacesAutocomplete
         placeholder="Search"

@@ -1,10 +1,12 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import AppStyles from "../AppStyles";
 import { ProgressBar, Surface } from "react-native-paper";
 import LottieView from "lottie-react-native";
+import { useContext } from "react";
+import TripContext from "./TripContext";
 
-export default function SelectCompanions() {
+export default function SelectCompanions({ navigation }) {
   const options = [
     {
       id: 1,
@@ -17,7 +19,7 @@ export default function SelectCompanions() {
       id: 2,
       name: "Best Buddies",
       description: "The more, the merrier",
-      icon: "https://lottie.host/eb5108f3-e710-4760-a86f-7f72a7c4e6ff/6pNWKER3DL.json",
+      icon: "https://lottie.host/d721f27f-f19b-482d-a851-d415d2fbfe80/0P3xIkDqEL.json",
       people: "3-10",
     },
     {
@@ -36,6 +38,8 @@ export default function SelectCompanions() {
     },
   ];
 
+  const { tripDetails, setTripDetails } = useContext(TripContext);
+
   return (
     <View style={styles.container}>
       <ProgressBar
@@ -49,20 +53,28 @@ export default function SelectCompanions() {
       </Text>
       <View style={styles.optionsContainer}>
         {options.map((option) => (
-          <Surface key={option.id} style={styles.surface} elevation={3}>
-            <View style={styles.optionContainer}>
-              <View style={styles.textContainer}>
-                <Text style={AppStyles.smallTitle}>{option.name}</Text>
-                <Text style={AppStyles.smallText}>{option.description}</Text>
+          <TouchableOpacity
+            key={option.id}
+            activeOpacity={0.5}
+            onPress={() => {
+              setTripDetails({ ...tripDetails, companions: option });
+              navigation.navigate("SelectDate");
+            }}
+          >
+            <Surface key={option.id} style={styles.surface} elevation={3}>
+              <View style={styles.optionContainer}>
+                <View style={styles.textContainer}>
+                  <Text style={AppStyles.smallTitle}>{option.name}</Text>
+                  <Text style={AppStyles.smallText}>{option.description}</Text>
+                </View>
+                <LottieView
+                  source={{ uri: option.icon }}
+                  style={styles.icon}
+                  autoPlay
+                />
               </View>
-              <LottieView
-                source={{ uri: option.icon }}
-                style={styles.icon}
-                autoPlay
-                loop
-              />
-            </View>
-          </Surface>
+            </Surface>
+          </TouchableOpacity>
         ))}
       </View>
     </View>
@@ -83,7 +95,7 @@ const styles = StyleSheet.create({
   surface: {
     padding: 16,
     backgroundColor: "#f8edeb",
-    marginBottom: 16,
+    marginBottom: 18,
     borderRadius: 8,
     width: 320,
   },
@@ -97,7 +109,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   icon: {
-    width: 70,
-    height: 70,
+    width: 60,
+    height: 60,
   },
 });
