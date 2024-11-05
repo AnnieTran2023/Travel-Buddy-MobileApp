@@ -2,8 +2,12 @@ import { View, Text, StyleSheet, ViewBase } from "react-native";
 import React from "react";
 import LottieView from "lottie-react-native";
 import AppStyles from "../AppStyles";
+import { useContext } from "react";
+import TripContext from "./TripContext";
 
 export default function BuildTrip() {
+  const { tripDetails, setTripDetails } = useContext(TripContext);
+
   return (
     <View style={styles.container}>
       <Text style={AppStyles.title}>Hold On Tight...</Text>
@@ -48,6 +52,6 @@ const styles = StyleSheet.create({
   smallIcon: {
     width: 200,
     height: 200,
-    alignSelf:"center"
+    alignSelf: "center",
   },
 });
