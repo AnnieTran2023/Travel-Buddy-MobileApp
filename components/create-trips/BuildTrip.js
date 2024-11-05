@@ -2,11 +2,20 @@ import { View, Text, StyleSheet, ViewBase } from "react-native";
 import React from "react";
 import LottieView from "lottie-react-native";
 import AppStyles from "../AppStyles";
-import { useContext } from "react";
+import { useContext , useEffect} from "react";
 import TripContext from "./TripContext";
 
 export default function BuildTrip() {
   const { tripDetails, setTripDetails } = useContext(TripContext);
+
+  useEffect(() => {
+    buildTrip();
+  }, []);
+
+  const buildTrip = () => {
+    const prompt = `Generate Travel Plan for Location : ${tripDetails.description}, starting from Location ${tripDetails.currentLocation}, from ${tripDetails.startDate} to ${tripDetails.endDate} for ${tripDetails.companions.name} with a ${tripDetails.budget.name} budget with a transport details , transport Price with transport Booking url, Hotels options list with HotelName, Hotel address, Price, hotel image url, geo coordinates, rating, descriptions and Places to visit nearby with placeName, Place Details, Place Image Url, Geo Coordinates, ticket Pricing, Time to visit each of the location for ${tripDetails.duration} with each day plan with best time to visit in JSON Format`;
+    console.log(prompt);
+  };
 
   return (
     <View style={styles.container}>

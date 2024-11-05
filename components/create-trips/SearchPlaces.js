@@ -6,48 +6,9 @@ import TripContext from "./TripContext";
 import Toast from "react-native-toast-message";
 import { ProgressBar } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
-import * as Location from "expo-location";
 
 export default function SearchPlaces({ navigation }) {
   const { tripDetails, setTripDetails } = useContext(TripContext);
-  const [currentLocation, setCurrentLocation] = useState(null);
-
-  useEffect(() => {
-    (async () => {
-      // Request location permissions
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        Toast.show({
-          type: "error",
-          text1: "Permission Denied",
-          text2:
-            "Travel Buddy needs your current location to create the best plan for you!",
-        });
-        return;
-      }
-
-      let location = await Location.getCurrentPositionAsync({});
-      const { latitude, longitude } = location.coords;
-
-      let reverseGeocode = await Location.reverseGeocodeAsync({
-        latitude,
-        longitude,
-      });
-
-      // Extract city name if available
-      if (reverseGeocode.length > 0) {
-        const { city, region, country } = reverseGeocode[0];
-        const cityName = `${city || ""}, ${country || ""}`;
-
-        // Set the currentLocation and update tripDetails
-        setCurrentLocation(cityName);
-        setTripDetails((prevDetails) => ({
-          ...prevDetails,
-          currentLocation: cityName,
-        }));
-      }
-    })();
-  }, []);
 
   useEffect(() => {
     console.log(tripDetails);
@@ -83,6 +44,7 @@ export default function SearchPlaces({ navigation }) {
             return;
           }
           setTripDetails({
+            ...tripDetails,
             description: data.description,
             location: details.geometry.location,
             photo: details.photos[0]?.photo_reference,
