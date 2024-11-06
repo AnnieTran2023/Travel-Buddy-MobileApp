@@ -1,14 +1,16 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, ScrollView } from "react-native";
 import React from "react";
 import AppStyles from "../AppStyles";
-import { Button , Card } from "react-native-paper";
+import { Button, Card } from "react-native-paper";
+import LottieView from "lottie-react-native";
+import OtherTrip from "./OtherTrip";
 
 export default function TripList({ trips }) {
-  const recentTrip = JSON.parse(trips[0].tripDetails);
+  const recentTrip = JSON.parse(trips[trips.length - 1].tripDetails);
   return (
-    <View>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <View>
-        <Card style={AppStyles.card}>
+        <Card>
           <Card.Cover
             source={{
               uri:
@@ -17,23 +19,42 @@ export default function TripList({ trips }) {
                 "&key=" +
                 process.env.EXPO_PUBLIC_GOOGLE_MAP_KEY,
             }}
-            style={{ borderRadius: 15 }}
+            style={{ marginBottom: 10, objectFit: "contain", height: 220 }}
           />
           <Card.Content>
-            <Text style={AppStyles.smallTitle}>{recentTrip?.description}</Text>
-            <Text style={AppStyles.smallText}>
-              {recentTrip?.startDate} - {recentTrip?.endDate}
-            </Text>
-          </Card.Content>
-          <Card.Actions>
-            <Button
-              mode="contained"
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
             >
-              See your plan!
-            </Button>
-          </Card.Actions>
+              <View>
+                <Text style={AppStyles.smallTitle}>
+                  {recentTrip?.description}
+                </Text>
+                <Text style={AppStyles.smallText}>
+                  {recentTrip?.startDate} - {recentTrip?.endDate}
+                </Text>
+              </View>
+              <LottieView
+                source={{ uri: recentTrip.budget.icon }}
+                style={[AppStyles.icon, { width: 55, height: 55 }]} // Adjust size as needed
+                autoPlay
+                loop
+              />
+            </View>
+          </Card.Content>
         </Card>
       </View>
-    </View>
+      {trips
+        .slice()
+        .reverse()
+        .map((trip, index) => {
+          if (index !== 0) {
+            return <OtherTrip trip={trip} key={index} />;
+          }
+        })}
+    </ScrollView>
   );
 }

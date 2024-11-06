@@ -17,6 +17,11 @@ const AppStyles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 10,
   },
+  extraSmallTitle: {
+    fontFamily: "Outfit-Medium",
+    fontSize: 18,
+    marginBottom: 10,
+  },
   text: {
     fontFamily: "Outfit-Regular",
     fontSize: 20,
@@ -27,6 +32,11 @@ const AppStyles = StyleSheet.create({
   smallText: {
     fontFamily: "Outfit-Regular",
     fontSize: 16,
+    color: "grey",
+  },
+  extraSmallText: {
+    fontFamily: "Outfit-Regular",
+    fontSize: 14,
     color: "grey",
   },
   input: {
@@ -42,7 +52,7 @@ const AppStyles = StyleSheet.create({
   },
   button: {
     marginTop: 20,
-    width: 350,
+    width: "100%",
     alignSelf: "center",
   },
   optionsContainer: {

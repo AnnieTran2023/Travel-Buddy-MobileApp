@@ -6,32 +6,35 @@ import StartNewTrip from "../StartNewTrip";
 import TripContext from "../create-trips/TripContext";
 import * as Location from "expo-location";
 import Toast from "react-native-toast-message";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { auth, db } from "../../configs/FirebaseConfig";
 import TripList from "../TripDisplay/TripList";
+import { ActivityIndicator } from "react-native-paper";
 
 export default function Trip({ navigation }) {
   const [trips, setTrips] = useState([]);
   const { tripDetails, setTripDetails } = useContext(TripContext);
+  const [loading, setLoading] = useState(true);
   const user = auth.currentUser;
 
   useEffect(() => {
-    fetchTrips();
+    if (user) {
+      const q = query(collection(db, "Trips"), where("user", "==", user.email));
+
+      // Listen for real-time updates on the Trips collection
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const tripsData = [];
+        querySnapshot.forEach((doc) => {
+          tripsData.push(doc.data());
+        });
+        setTrips(tripsData);
+        setLoading(false);
+      });
+
+      // Cleanup listener when the component is unmounted or user changes
+      return () => unsubscribe();
+    }
   }, [user]);
-
-  const fetchTrips = async () => {
-    const q = query(collection(db, "Trips"), where("user", "==", user.email));
-
-    const querySnapshot = await getDocs(q);
-
-    setTrips([]);
-
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
-      setTrips((prev) => [...prev, doc.data()]);
-    });
-  };
 
   useEffect(() => {
     (async () => {
@@ -64,7 +67,7 @@ export default function Trip({ navigation }) {
 
         setTripDetails((prevDetails) => ({
           ...prevDetails,
-          currentLocation: cityName, // Update current location only
+          currentLocation: cityName,
         }));
       } else {
         setTripDetails((prevDetails) => ({
@@ -96,7 +99,13 @@ export default function Trip({ navigation }) {
         )}
       </View>
 
-      {trips.length === 0 ? (
+      {loading ? (
+        <ActivityIndicator
+          size="large"
+          color="#0000ff"
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        />
+      ) : trips.length === 0 ? (
         <StartNewTrip navigation={navigation} />
       ) : (
         <TripList trips={trips} />
@@ -110,6 +119,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     height: "100%",
     paddingTop: 80,
-    padding: 30,
+    padding: 25,
   },
 });
