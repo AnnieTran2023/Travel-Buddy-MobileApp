@@ -6,10 +6,32 @@ import StartNewTrip from "../StartNewTrip";
 import TripContext from "../create-trips/TripContext";
 import * as Location from "expo-location";
 import Toast from "react-native-toast-message";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { auth, db } from "../../configs/FirebaseConfig";
+import TripList from "../TripDisplay/TripList";
 
 export default function Trip({ navigation }) {
   const [trips, setTrips] = useState([]);
   const { tripDetails, setTripDetails } = useContext(TripContext);
+  const user = auth.currentUser;
+
+  useEffect(() => {
+    fetchTrips();
+  }, [user]);
+
+  const fetchTrips = async () => {
+    const q = query(collection(db, "Trips"), where("user", "==", user.email));
+
+    const querySnapshot = await getDocs(q);
+
+    setTrips([]);
+
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+      setTrips((prev) => [...prev, doc.data()]);
+    });
+  };
 
   useEffect(() => {
     (async () => {
@@ -41,7 +63,7 @@ export default function Trip({ navigation }) {
         const cityName = `${city || ""}, ${country || ""}`;
 
         setTripDetails((prevDetails) => ({
-          ...prevDetails, // Retain previous tripDetails
+          ...prevDetails,
           currentLocation: cityName, // Update current location only
         }));
       } else {
@@ -65,11 +87,20 @@ export default function Trip({ navigation }) {
       >
         <Text style={AppStyles.titleLeft}>My Trips</Text>
         {trips.length > 0 && (
-          <AntDesign name="pluscircle" size={32} color="black" />
+          <AntDesign
+            name="pluscircle"
+            size={32}
+            color="black"
+            onPress={() => navigation.navigate("SearchPlaces")}
+          />
         )}
       </View>
 
-      {trips.length === 0 ? <StartNewTrip navigation={navigation} /> : null}
+      {trips.length === 0 ? (
+        <StartNewTrip navigation={navigation} />
+      ) : (
+        <TripList trips={trips} />
+      )}
     </View>
   );
 }

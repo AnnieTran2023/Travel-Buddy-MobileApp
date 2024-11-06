@@ -25,8 +25,8 @@ export default function SelectDate({ navigation }) {
 
   const dateSelectedContinue = () => {
     if (startDate && endDate) {
-      const formattedStartDate = moment(startDate).format("DD-MM-YYYY");
-      const formattedEndDate = moment(endDate).format("DD-MM-YYYY");
+      const formattedStartDate = moment(startDate).format("DD MMM YYYY");
+      const formattedEndDate = moment(endDate).format("DD MMM YYYY");
       const duration = moment(endDate).diff(moment(startDate), "days");
 
       setTripDetails({

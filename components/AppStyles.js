@@ -14,7 +14,7 @@ const AppStyles = StyleSheet.create({
   },
   smallTitle: {
     fontFamily: "Outfit-Medium",
-    fontSize: 19,
+    fontSize: 20,
     marginBottom: 10,
   },
   text: {
