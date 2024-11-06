@@ -2,19 +2,35 @@ import { View, Text, StyleSheet, ViewBase } from "react-native";
 import React from "react";
 import LottieView from "lottie-react-native";
 import AppStyles from "../AppStyles";
-import { useContext , useEffect} from "react";
+import { useContext, useEffect } from "react";
 import TripContext from "./TripContext";
+import { chatSession } from "../../configs/GeminiModal";
+import { auth, db } from "../../configs/FirebaseConfig";
+import { doc, setDoc } from "firebase/firestore"; 
 
-export default function BuildTrip() {
+export default function BuildTrip({ navigation }) {
   const { tripDetails, setTripDetails } = useContext(TripContext);
+  const user = auth.currentUser;
 
   useEffect(() => {
-    buildTrip();
-  }, []);
+    tripDetails && buildTrip();
+  }, [tripDetails]);
 
-  const buildTrip = () => {
+  const buildTrip = async () => {
     const prompt = `Generate Travel Plan for Location : ${tripDetails.description}, starting from Location ${tripDetails.currentLocation}, from ${tripDetails.startDate} to ${tripDetails.endDate} for ${tripDetails.companions.name} with a ${tripDetails.budget.name} budget with a transport details , transport Price with transport Booking url, Hotels options list with HotelName, Hotel address, Price, hotel image url, geo coordinates, rating, descriptions and Places to visit nearby with placeName, Place Details, Place Image Url, Geo Coordinates, ticket Pricing, Time to visit each of the location for ${tripDetails.duration} with each day plan with best time to visit in JSON Format`;
     console.log(prompt);
+    const result = await chatSession.sendMessage(prompt);
+    console.log(result.response.text());
+
+    const docId = Date.now().toString();
+
+    //add the trip to the firebase
+    const addDoc = await setDoc(doc(db, "Trips", docId), {
+      user: user.email,
+      tripDetails: JSON.stringify(tripDetails),
+      tripPlan: result.response.text(),
+    });
+    navigation.navigate("Trip");
   };
 
   return (

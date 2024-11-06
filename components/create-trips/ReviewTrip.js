@@ -30,11 +30,7 @@ export default function ReviewTrip({ navigation }) {
             title={() => <Text style={AppStyles.smallTitle}>Dates</Text>}
             description={() => (
               <Text style={AppStyles.smallText}>
-                {`${new Date(
-                  tripDetails.startDate
-                ).toLocaleDateString()} - ${new Date(
-                  tripDetails.endDate
-                ).toLocaleDateString()}  (${tripDetails.duration} days)`}
+                {`${tripDetails.startDate} - ${tripDetails.endDate}  (${tripDetails.duration} days)`}
               </Text>
             )}
             left={() => <List.Icon icon="calendar" color="#007FFF" />}
