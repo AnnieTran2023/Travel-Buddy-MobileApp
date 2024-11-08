@@ -17,7 +17,7 @@ export default function PlanList() {
         <Image
           source={{
             uri:
-              "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=" +
+              "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photo_reference=" +
               trip.photo +
               "&key=" +
               process.env.EXPO_PUBLIC_GOOGLE_MAP_KEY,

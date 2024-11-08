@@ -8,6 +8,7 @@ import OtherTrip from "./OtherTrip";
 export default function TripList({ trips, navigation }) {
   const recentTrip = JSON.parse(trips[trips.length - 1].tripDetails);
   const recentTripPlan = JSON.parse(trips[trips.length - 1].tripPlan);
+  console.log(typeof recentTripPlan);
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View>
@@ -15,7 +16,7 @@ export default function TripList({ trips, navigation }) {
           <Card.Cover
             source={{
               uri:
-                "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=" +
+                "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photo_reference=" +
                 recentTrip.photo +
                 "&key=" +
                 process.env.EXPO_PUBLIC_GOOGLE_MAP_KEY,
@@ -67,7 +68,7 @@ export default function TripList({ trips, navigation }) {
         .reverse()
         .map((trip, index) => {
           if (index !== 0) {
-            return <OtherTrip trip={trip} key={index} />;
+            return <OtherTrip trip={trip} key={index} navigation={navigation}/>;
           }
         })}
     </ScrollView>
