@@ -18,7 +18,7 @@ export default function SearchPlaces({ navigation }) {
     <View style={styles.container}>
       <ProgressBar
         progress={0.2}
-        color="#6200b3"
+        color="purple"
         style={{ marginBottom: 20 }}
       />
       <Text style={AppStyles.title}>Ready to explore?</Text>
