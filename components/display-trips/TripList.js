@@ -5,8 +5,9 @@ import { Button, Card } from "react-native-paper";
 import LottieView from "lottie-react-native";
 import OtherTrip from "./OtherTrip";
 
-export default function TripList({ trips }) {
+export default function TripList({ trips, navigation }) {
   const recentTrip = JSON.parse(trips[trips.length - 1].tripDetails);
+  const recentTripPlan = JSON.parse(trips[trips.length - 1].tripPlan);
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View>
@@ -39,11 +40,24 @@ export default function TripList({ trips }) {
               </View>
               <LottieView
                 source={{ uri: recentTrip.budget.icon }}
-                style={[AppStyles.icon, { width: 55, height: 55 }]} // Adjust size as needed
+                style={[AppStyles.icon, { width: 55, height: 55 }]}
                 autoPlay
                 loop
               />
             </View>
+            <Button
+              mode="contained"
+              labelStyle={AppStyles.buttonText}
+              contentStyle={AppStyles.buttonContent}
+              style={AppStyles.button}
+              onPress={() =>
+                navigation.navigate("PlanList", {
+                  plan: recentTripPlan,
+                })
+              }
+            >
+              Show my adventure
+            </Button>
           </Card.Content>
         </Card>
       </View>

@@ -4,11 +4,12 @@ import AppStyles from "../AppStyles";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import StartNewTrip from "../StartNewTrip";
 import TripContext from "../create-trips/TripContext";
+import TripList from "../display-trips/TripList";
 import * as Location from "expo-location";
 import Toast from "react-native-toast-message";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { auth, db } from "../../configs/FirebaseConfig";
-import TripList from "../TripDisplay/TripList";
+
 import { ActivityIndicator } from "react-native-paper";
 
 export default function Trip({ navigation }) {
@@ -108,7 +109,7 @@ export default function Trip({ navigation }) {
       ) : trips.length === 0 ? (
         <StartNewTrip navigation={navigation} />
       ) : (
-        <TripList trips={trips} />
+        <TripList trips={trips} navigation = {navigation} />
       )}
     </View>
   );

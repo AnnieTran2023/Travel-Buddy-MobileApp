@@ -26,6 +26,7 @@ import SelectDate from "./components/create-trips/SelectDate";
 import SelectBudget from "./components/create-trips/SelectBudget";
 import ReviewTrip from "./components/create-trips/ReviewTrip";
 import BuildTrip from "./components/create-trips/BuildTrip";
+import PlanList from "./components/display-travel-plan/PlanList";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -40,7 +41,7 @@ function AuthenticatedTabs() {
       }}
     >
       <Tab.Screen
-        name="My Trips"
+        name="Trip"
         component={Trip}
         options={{
           tabBarIcon: ({ color, size }) => (
@@ -169,6 +170,16 @@ const App = () => {
             name="BuildTrip"
             component={BuildTrip}
             options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="PlanList"
+            component={PlanList}
+            options={{
+              headerShown: true,
+              headerTransparent: true,
+              headerTitle: "",
+              headerBackTitle: "Back",
+            }}
           />
         </Stack.Navigator>
         <Toast />
