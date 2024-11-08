@@ -78,6 +78,14 @@ const AppStyles = StyleSheet.create({
     width: 60,
     height: 60,
   },
+  whiteText: {
+    fontSize: 30,
+    color: "white",
+    fontFamily: "Outfit-Bold",
+    textShadowColor: "rgba(0, 0, 0, 0.8)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 4,
+  },
 });
 
 export default AppStyles;

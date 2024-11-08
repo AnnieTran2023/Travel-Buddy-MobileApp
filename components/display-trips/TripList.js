@@ -52,6 +52,7 @@ export default function TripList({ trips, navigation }) {
               style={AppStyles.button}
               onPress={() =>
                 navigation.navigate("PlanList", {
+                  trip: recentTrip,
                   plan: recentTripPlan,
                 })
               }

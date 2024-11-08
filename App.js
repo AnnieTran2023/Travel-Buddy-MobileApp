@@ -3,8 +3,6 @@ import { View, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { BottomNavigation } from "react-native-paper";
-
 import { useFonts } from "expo-font";
 import { ActivityIndicator } from "react-native-paper";
 import Toast from "react-native-toast-message";
@@ -80,6 +78,7 @@ const App = () => {
     "Outfit-Regular": require("./assets/fonts/Outfit-Regular.ttf"),
     "Outfit-Medium": require("./assets/fonts/Outfit-Medium.ttf"),
     "Outfit-Bold": require("./assets/fonts/Outfit-Bold.ttf"),
+    "Outfit-ExtraBold": require("./assets/fonts/Outfit-ExtraBold.ttf"),
   });
 
   const [tripDetails, setTripDetails] = useState([]);
@@ -123,7 +122,8 @@ const App = () => {
               headerShown: true,
               headerTransparent: true,
               headerTitle: "",
-              headerBackTitle: "Back",
+              headerBackTitleVisible: false,
+              headerTintColor: "black",
             }}
           />
           <Stack.Screen
@@ -133,7 +133,8 @@ const App = () => {
               headerShown: true,
               headerTransparent: true,
               headerTitle: "",
-              headerBackTitle: "Back",
+              headerBackTitleVisible: false,
+              headerTintColor: "black",
             }}
           />
           <Stack.Screen
@@ -143,7 +144,8 @@ const App = () => {
               headerShown: true,
               headerTransparent: true,
               headerTitle: "",
-              headerBackTitle: "Back",
+              headerBackTitleVisible: false,
+              headerTintColor: "black",
             }}
           />
           <Stack.Screen
@@ -153,7 +155,8 @@ const App = () => {
               headerShown: true,
               headerTransparent: true,
               headerTitle: "",
-              headerBackTitle: "Back",
+              headerBackTitleVisible: false,
+              headerTintColor: "black",
             }}
           />
           <Stack.Screen
@@ -163,7 +166,8 @@ const App = () => {
               headerShown: true,
               headerTransparent: true,
               headerTitle: "",
-              headerBackTitle: "Back",
+              headerBackTitleVisible: false,
+              headerTintColor: "black",
             }}
           />
           <Stack.Screen
@@ -178,7 +182,8 @@ const App = () => {
               headerShown: true,
               headerTransparent: true,
               headerTitle: "",
-              headerBackTitle: "Back",
+              headerBackTitleVisible: false,
+              headerTintColor: "black",
             }}
           />
         </Stack.Navigator>
