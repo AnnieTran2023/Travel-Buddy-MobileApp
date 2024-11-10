@@ -1,6 +1,14 @@
-import { View, Text, StyleSheet, Linking } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 import React from "react";
 import AppStyles from "../AppStyles";
+import { Card } from "react-native-paper";
+import Feather from "@expo/vector-icons/Feather";
 
 export default function Transport({ transportDetails }) {
   console.log(transportDetails);
@@ -11,46 +19,78 @@ export default function Transport({ transportDetails }) {
     } else if (transportDetails.flights) {
       const flight = transportDetails.flights[0];
       return (
-        <View style={styles.container}>
-          <Text style={AppStyles.smallTitle}>Airline: {flight.airline}</Text>
-          <Text>Departure: {flight.departure}</Text>
-          <Text>Arrival: {flight.arrival}</Text>
-          <Text>
-            Date: {flight.departureDate} - {flight.arrivalDate}
-          </Text>
-          <Text>
-            Time: {flight.departureTime} - {flight.arrivalTime}
-          </Text>
-          <Text>Price: {flight.price} EUR</Text>
-          <Text
-            style={styles.link}
-            onPress={() => Linking.openURL(flight.bookingUrl)}
-          >
-            Book Flight
-          </Text>
-        </View>
+        <Card style={{ marginTop: 0, margin: 10 }}>
+          <Card.Content>
+            <Text style={AppStyles.smallTitle}>
+              Airline: {flight.airline} ✈️
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "flex-end",
+              }}
+            >
+              <View style={{ flex: 6 }}>
+                <Text style={AppStyles.smallText}>
+                  Departure: {flight.departure}
+                </Text>
+                <Text style={AppStyles.smallText}>
+                  Arrival: {flight.arrival}
+                </Text>
+                <Text style={AppStyles.smallText}>
+                  Price: {flight.price} EUR
+                </Text>
+              </View>
+              <TouchableOpacity
+                style={{ flex: 1, alignItems: "flex-end" }}
+                onPress={() => Linking.openURL(flight.bookingUrl)}
+              >
+                <Feather name="external-link" size={24} color="black" />
+              </TouchableOpacity>
+            </View>
+          </Card.Content>
+        </Card>
       );
     } else if (transportDetails.trains) {
       const train = transportDetails.trains[0];
       return (
-        <View style={styles.container}>
-          <Text style={AppStyles.smallTitle}>Train Operator: {train.operator}</Text>
-          <Text>Departure: {train.departure}</Text>
-          <Text>Arrival: {train.arrival}</Text>
-          <Text>
-            Date: {train.departureDate} - {train.arrivalDate}
-          </Text>
-          <Text>
-            Time: {train.departureTime} - {train.arrivalTime}
-          </Text>
-          <Text>Price: {train.price}</Text>
-          <Text
-            style={styles.link}
-            onPress={() => Linking.openURL(train.bookingUrl)}
-          >
-            Book Train
-          </Text>
-        </View>
+        <Card style={{ marginTop: 0, margin: 10 }}>
+          <Card.Content>
+            <Text style={AppStyles.smallTitle}>
+              Train Operator: {train.operator} 🚆
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <View style={{ flex: 6 }}>
+                <Text style={AppStyles.smallText}>
+                  Departure: {train.departure}
+                </Text>
+                <Text style={AppStyles.smallText}>
+                  Arrival: {train.arrival}
+                </Text>
+                <Text style={AppStyles.smallText}>
+                  Date: {train.departureDate} - {train.arrivalDate}
+                </Text>
+                <Text style={AppStyles.smallText}>
+                  Time: {train.departureTime} - {train.arrivalTime}
+                </Text>
+                <Text style={AppStyles.smallText}>
+                  Price: {train.price} EUR
+                </Text>
+              </View>
+              <TouchableOpacity
+                style={{ flex: 1, alignItems: "flex-end" }}
+                onPress={() => Linking.openURL(train.bookingUrl)}
+              >
+                <Feather name="external-link" size={24} color="black" />
+              </TouchableOpacity>
+            </View>
+          </Card.Content>
+        </Card>
       );
     } else if (transportDetails.localTransport) {
       const local = transportDetails.localTransport;
@@ -77,8 +117,8 @@ export default function Transport({ transportDetails }) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    padding:10,
-    marginTop:0,
+    padding: 10,
+    marginTop: 0,
   },
   link: {
     color: "blue",
