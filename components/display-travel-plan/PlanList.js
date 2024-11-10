@@ -3,6 +3,7 @@ import React from "react";
 import { useRoute } from "@react-navigation/native";
 import Transport from "./Transport";
 import AppStyles from "../AppStyles";
+import Accommodation from "./Accommodation";
 
 export default function PlanList() {
   const route = useRoute();
@@ -31,6 +32,7 @@ export default function PlanList() {
       </View>
       <View style={styles.planContainer}>
         <Transport transportDetails={plan.transport} />
+        <Accommodation accommodationDetails={plan.accommodation} />
       </View>
     </ScrollView>
   );

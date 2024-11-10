@@ -86,6 +86,18 @@ const AppStyles = StyleSheet.create({
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 4,
   },
+  overlayTextHotel: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: 10,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    color: "white",
+    textAlign: "center",
+    fontFamily: "Outfit-Medium",
+    fontSize:17
+  },
 });
 
 export default AppStyles;

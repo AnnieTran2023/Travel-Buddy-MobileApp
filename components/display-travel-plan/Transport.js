@@ -19,10 +19,51 @@ export default function Transport({ transportDetails }) {
     } else if (transportDetails.flights) {
       const flight = transportDetails.flights[0];
       return (
+        <View>
+          <View style={{ marginLeft: 12 }}>
+            <Text style={AppStyles.smallTitle}>
+              Airline: {flight?.airline} ✈️
+            </Text>
+          </View>
+          <Card style={{ marginTop: 0, margin: 10 }}>
+            <Card.Content>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "flex-end",
+                }}
+              >
+                <View style={{ flex: 6 }}>
+                  <Text style={AppStyles.smallText}>
+                    Departure: {flight?.departure}
+                  </Text>
+                  <Text style={AppStyles.smallText}>
+                    Arrival: {flight?.arrival}
+                  </Text>
+                  <Text style={AppStyles.smallText}>
+                    Price: {flight?.price} EUR
+                  </Text>
+                </View>
+                {transportDetails.flights.length !== 0 ? (
+                  <TouchableOpacity
+                    style={{ flex: 1, alignItems: "flex-end" }}
+                    onPress={() => Linking.openURL(flight.bookingUrl)}
+                  >
+                    <Feather name="external-link" size={24} color="black" />
+                  </TouchableOpacity>
+                ) : null}
+              </View>
+            </Card.Content>
+          </Card>
+        </View>
+      );
+    } else if (transportDetails.trains) {
+      const train = transportDetails.trains[0];
+      return (
         <Card style={{ marginTop: 0, margin: 10 }}>
           <Card.Content>
             <Text style={AppStyles.smallTitle}>
-              Airline: {flight.airline} ✈️
+              Train Operator: {train?.operator} 🚆
             </Text>
             <View
               style={{
@@ -32,54 +73,13 @@ export default function Transport({ transportDetails }) {
             >
               <View style={{ flex: 6 }}>
                 <Text style={AppStyles.smallText}>
-                  Departure: {flight.departure}
+                  Departure: {train?.departure}
                 </Text>
                 <Text style={AppStyles.smallText}>
-                  Arrival: {flight.arrival}
+                  Arrival: {train?.arrival}
                 </Text>
                 <Text style={AppStyles.smallText}>
-                  Price: {flight.price} EUR
-                </Text>
-              </View>
-              <TouchableOpacity
-                style={{ flex: 1, alignItems: "flex-end" }}
-                onPress={() => Linking.openURL(flight.bookingUrl)}
-              >
-                <Feather name="external-link" size={24} color="black" />
-              </TouchableOpacity>
-            </View>
-          </Card.Content>
-        </Card>
-      );
-    } else if (transportDetails.trains) {
-      const train = transportDetails.trains[0];
-      return (
-        <Card style={{ marginTop: 0, margin: 10 }}>
-          <Card.Content>
-            <Text style={AppStyles.smallTitle}>
-              Train Operator: {train.operator} 🚆
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <View style={{ flex: 6 }}>
-                <Text style={AppStyles.smallText}>
-                  Departure: {train.departure}
-                </Text>
-                <Text style={AppStyles.smallText}>
-                  Arrival: {train.arrival}
-                </Text>
-                <Text style={AppStyles.smallText}>
-                  Date: {train.departureDate} - {train.arrivalDate}
-                </Text>
-                <Text style={AppStyles.smallText}>
-                  Time: {train.departureTime} - {train.arrivalTime}
-                </Text>
-                <Text style={AppStyles.smallText}>
-                  Price: {train.price} EUR
+                  Price: {train?.price} EUR
                 </Text>
               </View>
               <TouchableOpacity
