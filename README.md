@@ -2,9 +2,9 @@
 
 Travel Buddy is a mobile application designed to help users plan and manage their trips. The app provides features such as trip planning, accommodation booking, and transportation management. It is built using React Native and integrates with Firebase for authentication and data storage.
 <div style="display: flex; justify-content: space-between;">
-  <img width="300" height = "600" alt="Screenshot 2024-11-12 at 0 13 22" src="https://github.com/user-attachments/assets/789812cd-7d17-49fe-971b-60e164fc5aa3" />
-  <img width="300" height = "600" alt="Screenshot 2024-11-12 at 0 14 12" src="https://github.com/user-attachments/assets/efaabb27-3042-4aa7-a8cb-44893cddb26b" />
-  <img width="300" height = "600" alt="Screenshot 2024-11-12 at 0 14 40" src="https://github.com/user-attachments/assets/d6f4ba12-f119-46cb-ab02-852cb75cedf9" />
+  <img width="200" height = "400" alt="Screenshot 2024-11-12 at 0 13 22" src="https://github.com/user-attachments/assets/789812cd-7d17-49fe-971b-60e164fc5aa3" />
+  <img width="200" height = "400" alt="Screenshot 2024-11-12 at 0 14 12" src="https://github.com/user-attachments/assets/efaabb27-3042-4aa7-a8cb-44893cddb26b" />
+  <img width="200" height = "400" alt="Screenshot 2024-11-12 at 0 14 40" src="https://github.com/user-attachments/assets/d6f4ba12-f119-46cb-ab02-852cb75cedf9" />
 </div>
 
 ## Features
