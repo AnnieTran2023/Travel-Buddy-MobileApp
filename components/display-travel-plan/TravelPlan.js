@@ -19,7 +19,6 @@ export default function TravelPlan({ travelPlanDetails }) {
         <ScrollView showsVerticalScrollIndicator={false}>
           {travelPlanDetails?.map((day, dayIndex) => (
             <View key={dayIndex} style={styles.dayContainer}>
-              {/* Extracting just "Day 1", "Day 2", etc. */}
               <Text style={AppStyles.extraSmallTitle}>Day {dayIndex + 1}</Text>
 
               {day.schedule.map((place, index) => (

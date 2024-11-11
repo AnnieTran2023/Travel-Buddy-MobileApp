@@ -33,8 +33,12 @@ function AuthenticatedTabs() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: "black",
+        tabBarActiveTintColor: "#6200b3",
         tabBarInactiveTintColor: "#a7a7a7",
+        tabBarStyle: {
+          height: 90,
+          backgroundColor: "#f8f5ff",
+        },
         headerShown: false,
       }}
     >
@@ -192,7 +196,5 @@ const App = () => {
     </TripContext.Provider>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default App;
