@@ -37,7 +37,7 @@ export default function Accommodation({ accommodationDetails }) {
                         💰 Price : {accommodation.price}
                       </Text>
                       <Text style={AppStyles.extraSmallText}>
-                        🌟 {accommodation.rating}
+                        🌟 Rating: {accommodation.rating}
                       </Text>
                     </View>
                     <TouchableOpacity

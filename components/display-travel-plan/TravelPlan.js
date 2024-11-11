@@ -33,7 +33,6 @@ export default function TravelPlan({ travelPlanDetails }) {
                       {place.placeName}
                     </Text>
                   </View>
-
                   <Card.Content>
                     <Text style={AppStyles.extraSmallText}>
                       🕒 {place.time}
@@ -48,20 +47,23 @@ export default function TravelPlan({ travelPlanDetails }) {
                         marginTop: 8,
                       }}
                     >
-                      <Text style={AppStyles.extraSmallText}>
-                        💸 Price:{" "}
-                        {place.ticketPricing && place.ticketPricing !== "N/A"
-                          ? place.ticketPricing
-                          : "Unknown"}
-                      </Text>
-                      <Text style={AppStyles.extraSmallText}>
-                        ⭐ Rating:{" "}
-                        {place.placeRating && place.placeRating !== "N/A"
-                          ? place.placeRating
-                          : "Unknown"}
-                      </Text>
+                      <View>
+                        <Text style={AppStyles.extraSmallText}>
+                          💸 Price:{" "}
+                          {place.ticketPricing && place.ticketPricing !== "N/A"
+                            ? place.ticketPricing
+                            : "Unknown"}
+                        </Text>
+                        <Text style={AppStyles.extraSmallText}>
+                          ⭐ Rating:{" "}
+                          {place.placeRating && place.placeRating !== "N/A"
+                            ? place.placeRating
+                            : "Unknown"}
+                        </Text>
+                      </View>
                       <TouchableOpacity
                         onPress={() => Linking.openURL(place.placeUrl)}
+                        style = {{alignSelf: "flex-end"}}
                       >
                         <Feather name="external-link" size={22} color="black" />
                       </TouchableOpacity>
