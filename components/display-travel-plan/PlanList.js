@@ -4,6 +4,7 @@ import { useRoute } from "@react-navigation/native";
 import Transport from "./Transport";
 import AppStyles from "../AppStyles";
 import Accommodation from "./Accommodation";
+import TravelPlan from "./TravelPlan";
 
 export default function PlanList() {
   const route = useRoute();
@@ -33,10 +34,11 @@ export default function PlanList() {
       <View style={styles.planContainer}>
         <Transport transportDetails={plan.transport} />
         <Accommodation accommodationDetails={plan.accommodation} />
+        <TravelPlan travelPlanDetails={plan.itinerary} />
       </View>
     </ScrollView>
   );
-  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -60,8 +62,8 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   overlay: {
-    ...StyleSheet.absoluteFillObject, 
-    backgroundColor: "rgba(0, 0, 0, 0.2)", 
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
     justifyContent: "center",
     alignItems: "center",
   },

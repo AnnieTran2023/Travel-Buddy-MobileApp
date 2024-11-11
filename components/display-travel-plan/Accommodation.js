@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Linking,
 } from "react-native";
-import AppStyles from "../AppStyles";
+import AppStyles from "../AppStyles";2
 import { Card } from "react-native-paper";
 import Feather from "@expo/vector-icons/Feather";
 
@@ -20,7 +20,7 @@ export default function Accommodation({ accommodationDetails }) {
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           {accommodationDetails?.map((accommodation, index) => {
             return (
-              <Card style={{ marginRight: 15 }}>
+              <Card key = {index} style={{ marginRight: 18 }}>
                 <View style={styles.imageContainer}>
                   <Card.Cover
                     source={require("../../assets/landscape.jpg")}
@@ -41,7 +41,7 @@ export default function Accommodation({ accommodationDetails }) {
                       </Text>
                     </View>
                     <TouchableOpacity
-                      style={{ flex: 1, alignItems: "center" }}
+                      style={{ flex: 1, marginTop:20, marginLeft:10 }}
                       onPress={() =>
                         Linking.openURL(accommodation.hotelBookingUrl)
                       }
@@ -59,7 +59,6 @@ export default function Accommodation({ accommodationDetails }) {
   );
 }
 
-// StyleSheet for overlay effect
 const styles = StyleSheet.create({
   imageContainer: {
     position: "relative",

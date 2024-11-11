@@ -60,7 +60,7 @@ export default function Transport({ transportDetails }) {
     } else if (transportDetails.trains) {
       const train = transportDetails.trains[0];
       return (
-        <Card style={{ marginTop: 0, margin: 10 }}>
+        <Card style={{ marginTop: 0, marginLeft: 0 }}>
           <Card.Content>
             <Text style={AppStyles.smallTitle}>
               Train Operator: {train?.operator} 🚆
