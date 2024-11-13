@@ -39,8 +39,8 @@ Travel Buddy is a mobile application designed to help users plan and manage thei
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/AnnieTran2023/travel-buddy-mobile-app.git
-   cd travel-buddy-mobile-app
+   git clone https://github.com/AnnieTran2023/Travel-Buddy-MobileApp.git
+   cd Travel-Buddy-MobileApp
 
    ```
 
