@@ -38,50 +38,52 @@ export default function Trip({ navigation }) {
   }, [user]);
 
   useEffect(() => {
-    (async () => {
-      // Request location permissions
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        Toast.show({
-          type: "error",
-          text1: "Permission Denied",
-          text2:
-            "Travel Buddy needs your current location to create the best plan for you!",
+    if (!tripDetails.currentLocation) {
+      (async () => {
+        // Request location permissions
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+          Toast.show({
+            type: "error",
+            text1: "Permission Denied",
+            text2:
+              "Travel Buddy needs your current location to create the best plan for you!",
+          });
+          return;
+        }
+
+        let location = await Location.getCurrentPositionAsync({});
+        const { latitude, longitude } = location.coords;
+
+        console.log(latitude, longitude);
+
+        let reverseGeocode = await Location.reverseGeocodeAsync({
+          latitude,
+          longitude,
         });
-        return;
-      }
 
-      let location = await Location.getCurrentPositionAsync({});
-      const { latitude, longitude } = location.coords;
+        // Extract city name if available
+        if (reverseGeocode.length > 0) {
+          const { city, region, country } = reverseGeocode[0];
+          const cityName = `${city || ""}, ${country || ""}`;
 
-      console.log(latitude, longitude);
-
-      let reverseGeocode = await Location.reverseGeocodeAsync({
-        latitude,
-        longitude,
-      });
-
-      // Extract city name if available
-      if (reverseGeocode.length > 0) {
-        const { city, region, country } = reverseGeocode[0];
-        const cityName = `${city || ""}, ${country || ""}`;
-
-        setTripDetails((prevDetails) => ({
-          ...prevDetails,
-          currentLocation: cityName,
-          currentLatitude: latitude, 
-          currentLongitude: longitude, 
-        }));
-      } else {
-        setTripDetails((prevDetails) => ({
-          ...prevDetails,
-          currentLocation: "Random city",
-          currentLatitude: latitude, 
-          currentLongitude: longitude, 
-        }));
-      }
-    })();
-  }, []);
+          setTripDetails((prevDetails) => ({
+            ...prevDetails,
+            currentLocation: cityName,
+            currentLatitude: latitude,
+            currentLongitude: longitude,
+          }));
+        } else {
+          setTripDetails((prevDetails) => ({
+            ...prevDetails,
+            currentLocation: "Random city",
+            currentLatitude: latitude,
+            currentLongitude: longitude,
+          }));
+        }
+      })();
+    }
+  }, [tripDetails.currentLocation]);
 
   return (
     <View style={styles.container}>
@@ -107,13 +109,12 @@ export default function Trip({ navigation }) {
       {loading ? (
         <ActivityIndicator
           size="large"
-          color="#0000ff"
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         />
       ) : trips.length === 0 ? (
         <StartNewTrip navigation={navigation} />
       ) : (
-        <TripList trips={trips} navigation = {navigation} />
+        <TripList trips={trips} navigation={navigation} />
       )}
     </View>
   );
