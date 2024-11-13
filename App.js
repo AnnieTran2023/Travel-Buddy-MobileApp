@@ -187,7 +187,7 @@ const App = () => {
               headerTransparent: true,
               headerTitle: "",
               headerBackTitleVisible: false,
-              headerTintColor: "black",
+              headerTintColor: "white",
             }}
           />
         </Stack.Navigator>

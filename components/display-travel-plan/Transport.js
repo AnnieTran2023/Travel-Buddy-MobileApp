@@ -27,6 +27,12 @@ export default function Transport({ transportDetails }) {
           </View>
           <Card style={{ marginTop: 0, margin: 10 }}>
             <Card.Content>
+              <Text style={AppStyles.smallText}>
+                Departure: {flight?.departure}
+              </Text>
+              <Text style={AppStyles.smallText}>
+                Arrival: {flight?.arrival}
+              </Text>
               <View
                 style={{
                   flexDirection: "row",
@@ -34,12 +40,6 @@ export default function Transport({ transportDetails }) {
                 }}
               >
                 <View style={{ flex: 6 }}>
-                  <Text style={AppStyles.smallText}>
-                    Departure: {flight?.departure}
-                  </Text>
-                  <Text style={AppStyles.smallText}>
-                    Arrival: {flight?.arrival}
-                  </Text>
                   <Text style={AppStyles.smallText}>
                     Price: {flight?.price} EUR
                   </Text>

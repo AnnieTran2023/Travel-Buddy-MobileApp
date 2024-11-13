@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Image, View , StyleSheet} from "react-native";
+import { Image, View, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 import { ActivityIndicator } from "react-native-paper";
 
@@ -28,7 +28,7 @@ const GooglePlaceImage = ({ placeName, style }) => {
 
         if (detailsData.result.photos && detailsData.result.photos.length > 0) {
           const photoReference = detailsData.result.photos[0].photo_reference;
-          const imageUrl = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${process.env.EXPO_PUBLIC_GOOGLE_MAP_KEY}`;
+          const imageUrl = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photoreference=${photoReference}&key=${process.env.EXPO_PUBLIC_GOOGLE_MAP_KEY}`;
           setImageUri(imageUrl);
         }
       }
