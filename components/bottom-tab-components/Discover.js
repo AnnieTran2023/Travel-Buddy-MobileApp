@@ -95,7 +95,7 @@ export default function Discover() {
       ) : tripDetails.currentLocation ? (
         <>
           <View style={{ flexDirection: "row", marginTop: 10 }}>
-            <Text style={AppStyles.text}>Let Travel-Buddy lead you</Text>
+            <Text style={AppStyles.text}>Let Travel-Buddy lead you!</Text>
             <LottieView
               source={{
                 uri: "https://lottie.host/179ca274-aa57-426f-8154-7d9f505b9655/s717E7RJRn.json",
