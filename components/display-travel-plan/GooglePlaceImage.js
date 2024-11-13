@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Image } from "react-native";
+import { Image, View , StyleSheet} from "react-native";
 import PropTypes from "prop-types";
+import { ActivityIndicator } from "react-native-paper";
 
 const GooglePlaceImage = ({ placeName, style }) => {
   const [imageUri, setImageUri] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const fetchPlaceImage = async () => {
     try {
+      setLoading(true);
       const response = await fetch(
         `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(
           placeName
@@ -30,6 +34,8 @@ const GooglePlaceImage = ({ placeName, style }) => {
       }
     } catch (error) {
       console.error("Error fetching place image:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -38,12 +44,31 @@ const GooglePlaceImage = ({ placeName, style }) => {
   }, [placeName]);
 
   return (
-    <Image
-      source={imageUri ? { uri: imageUri } : require("../../assets/map.jpg")}
-      style={style}
-    />
+    <View style={[styles.container, style]}>
+      {loading ? (
+        <ActivityIndicator animating={loading} size="large" />
+      ) : (
+        <Image
+          source={
+            imageUri ? { uri: imageUri } : require("../../assets/map.jpg")
+          }
+          style={[styles.image, style]}
+        />
+      )}
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+  },
+});
 
 GooglePlaceImage.propTypes = {
   placeName: PropTypes.string.isRequired,

@@ -8,7 +8,6 @@ import {
   Linking,
 } from "react-native";
 import AppStyles from "../AppStyles";
-2;
 import { Card } from "react-native-paper";
 import Feather from "@expo/vector-icons/Feather";
 import GooglePlaceImage from "./GooglePlaceImage";
