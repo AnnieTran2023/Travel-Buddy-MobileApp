@@ -39,6 +39,11 @@ const AppStyles = StyleSheet.create({
     fontSize: 14,
     color: "grey",
   },
+  extraSmallTextRed: {
+    fontFamily: "Outfit-Regular",
+    fontSize: 14,
+    color: "red",
+  },
   input: {
     marginBottom: 20,
     height: 70,
@@ -96,7 +101,7 @@ const AppStyles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     fontFamily: "Outfit-Medium",
-    fontSize:17
+    fontSize: 17,
   },
 });
 

@@ -6,7 +6,7 @@ import {
   Provider as PaperProvider,
 } from "react-native-paper";
 import Toast from "react-native-toast-message";
-import { signOut, onAuthStateChanged } from "firebase/auth";
+import { signOut, onAuthStateChanged , updateProfile} from "firebase/auth";
 import { auth } from "../../configs/FirebaseConfig";
 import AppStyles from "../AppStyles";
 
@@ -14,8 +14,6 @@ export default function Profile({ navigation }) {
   const [user, setUser] = useState(null);
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordVisible, setPasswordVisible] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -27,7 +25,6 @@ export default function Profile({ navigation }) {
         setUser(null);
         setDisplayName("");
         setEmail("");
-        setPassword("");
       }
     });
 
@@ -40,7 +37,7 @@ export default function Profile({ navigation }) {
         Toast.show({
           type: "success",
           text1: "Logged out successfully",
-          visibilityTime: 2000,
+          visibilityTime: 3000,
         });
         navigation.navigate("SignIn");
       })
@@ -51,6 +48,31 @@ export default function Profile({ navigation }) {
         });
       });
   };
+
+   const handleChangeName = () => {
+     if (displayName !== user.displayName) {
+       updateProfile(user, { displayName })
+         .then(() => {
+           Toast.show({
+             type: "success",
+             text1: "Name updated successfully",
+             visibilityTime: 3000,
+           });
+         })
+         .catch((error) => {
+           Toast.show({
+             type: "error",
+             text1: "Failed to update name: " + error.message,
+           });
+         });
+     } else {
+       Toast.show({
+         type: "info",
+         text1: "No changes to name",
+         visibilityTime: 3000,
+       });
+     }
+   };
 
   return (
     <PaperProvider theme={AppStyles.theme}>
@@ -79,33 +101,33 @@ export default function Profile({ navigation }) {
                 theme={AppStyles.theme}
                 editable={false}
               />
-              <TextInput
-                mode="outlined"
-                label="Password"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry={!passwordVisible}
-                right={
-                  <TextInput.Icon
-                    icon={passwordVisible ? "eye-off" : "eye"}
-                    onPress={() => setPasswordVisible(!passwordVisible)}
-                  />
-                }
-                style={AppStyles.input}
-                theme={AppStyles.theme}
-              />
             </View>
-            <Button
-              mode="contained"
-              buttonColor="black"
-              textColor="white"
-              labelStyle={AppStyles.buttonText}
-              contentStyle={AppStyles.buttonContent}
-              style={AppStyles.button}
-              onPress={handleLogout}
+            <View
+              style={{  justifyContent: "space-around" }}
             >
-              Log Out
-            </Button>
+              <Button
+                mode="outlined"
+                buttonColor="white"
+                textColor="black"
+                labelStyle={AppStyles.buttonText}
+                contentStyle={AppStyles.buttonContent}
+                style={AppStyles.button}
+                onPress={handleChangeName}
+              >
+                Save
+              </Button>
+              <Button
+                mode="contained"
+                buttonColor="black"
+                textColor="white"
+                labelStyle={AppStyles.buttonText}
+                contentStyle={AppStyles.buttonContent}
+                style={AppStyles.button}
+                onPress={handleLogout}
+              >
+                Log Out
+              </Button>
+            </View>
           </>
         ) : (
           <Text>Loading...</Text>

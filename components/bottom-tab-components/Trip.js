@@ -69,11 +69,15 @@ export default function Trip({ navigation }) {
         setTripDetails((prevDetails) => ({
           ...prevDetails,
           currentLocation: cityName,
+          currentLatitude: latitude, 
+          currentLongitude: longitude, 
         }));
       } else {
         setTripDetails((prevDetails) => ({
           ...prevDetails,
           currentLocation: "Random city",
+          currentLatitude: latitude, 
+          currentLongitude: longitude, 
         }));
       }
     })();
