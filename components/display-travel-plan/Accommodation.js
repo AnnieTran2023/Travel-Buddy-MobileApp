@@ -7,9 +7,11 @@ import {
   TouchableOpacity,
   Linking,
 } from "react-native";
-import AppStyles from "../AppStyles";2
+import AppStyles from "../AppStyles";
+2;
 import { Card } from "react-native-paper";
 import Feather from "@expo/vector-icons/Feather";
+import GooglePlaceImage from "./GooglePlaceImage";
 
 export default function Accommodation({ accommodationDetails }) {
   console.log(accommodationDetails);
@@ -20,10 +22,10 @@ export default function Accommodation({ accommodationDetails }) {
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           {accommodationDetails?.map((accommodation, index) => {
             return (
-              <Card key = {index} style={{ marginRight: 18 }}>
+              <Card key={index} style={{ marginRight: 18 }}>
                 <View style={styles.imageContainer}>
-                  <Card.Cover
-                    source={require("../../assets/landscape.jpg")}
+                  <GooglePlaceImage
+                    placeName={accommodation.hotelName}
                     style={styles.image}
                   />
                   <Text style={AppStyles.overlayTextHotel}>
@@ -41,7 +43,7 @@ export default function Accommodation({ accommodationDetails }) {
                       </Text>
                     </View>
                     <TouchableOpacity
-                      style={{ flex: 1, marginTop:20, marginLeft:10 }}
+                      style={{ flex: 1, marginTop: 20, marginLeft: 10 }}
                       onPress={() =>
                         Linking.openURL(accommodation.hotelBookingUrl)
                       }
