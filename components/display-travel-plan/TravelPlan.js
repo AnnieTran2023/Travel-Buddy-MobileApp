@@ -10,6 +10,7 @@ import AppStyles from "../AppStyles";
 import { Card } from "react-native-paper";
 import Feather from "react-native-vector-icons/Feather";
 import { Linking } from "react-native";
+import GooglePlaceImage from "./GooglePlaceImage";
 
 export default function TravelPlan({ travelPlanDetails }) {
   return (
@@ -24,8 +25,8 @@ export default function TravelPlan({ travelPlanDetails }) {
               {day.schedule.map((place, index) => (
                 <Card key={index} style={styles.card}>
                   <View style={styles.imageContainer}>
-                    <Card.Cover
-                      source={require("../../assets/landscape.jpg")}
+                    <GooglePlaceImage
+                      placeName={place.placeName}
                       style={styles.image}
                     />
                     <Text style={AppStyles.overlayTextHotel}>
@@ -62,7 +63,7 @@ export default function TravelPlan({ travelPlanDetails }) {
                       </View>
                       <TouchableOpacity
                         onPress={() => Linking.openURL(place.placeUrl)}
-                        style = {{alignSelf: "flex-end"}}
+                        style={{ alignSelf: "flex-end" }}
                       >
                         <Feather name="external-link" size={22} color="black" />
                       </TouchableOpacity>
@@ -92,6 +93,6 @@ const styles = StyleSheet.create({
   image: {
     height: 180,
     width: "100%",
-    objectFit: "contain",
+    objectFit: "cover",
   },
 });
