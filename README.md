@@ -8,6 +8,15 @@ Travel Buddy is a mobile application designed to help users plan and manage thei
   <img width="200" height = "400" alt="Screenshot 2024-11-12 at 0 14 40" src="https://github.com/user-attachments/assets/d6f4ba12-f119-46cb-ab02-852cb75cedf9" />
 </div>
 
+<div>
+    <a href="https://www.loom.com/share/102d3bcbc3054eeb8489c0a6b08dbf48">
+      <p>Demo-TravelBuddy - Watch Video</p>
+    </a>
+    <a href="https://www.loom.com/share/102d3bcbc3054eeb8489c0a6b08dbf48">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/102d3bcbc3054eeb8489c0a6b08dbf48-06b514c02561d0a7-full-play.gif">
+    </a>
+  </div>
+
 ## Features
 
 - **User Authentication**: Sign up, sign in, and log out using Firebase Authentication.
