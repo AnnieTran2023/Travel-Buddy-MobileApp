@@ -32,7 +32,7 @@ Travel Buddy is a mobile application designed to help users plan and manage thei
 - **Lottie for React Native**: For adding animations.
 - **React Context API**: For state management.
 - **Google API**: For fetching place images and auto-complete suggestions.
-- **Gemini Model**: For generating detailed travel plans.
+- **Gemini API**: For generating detailed travel plans.
 
 ## Installation
 
