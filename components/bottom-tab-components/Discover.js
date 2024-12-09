@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Alert, Linking } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState, useCallback } from "react";
 import MapView, { Marker, Callout } from "react-native-maps";
 import { ActivityIndicator } from "react-native-paper";
 import * as Location from "expo-location";
@@ -9,58 +9,66 @@ import AppStyles from "../AppStyles";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { TouchableOpacity } from "react-native";
 import LottieView from "lottie-react-native";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function Discover() {
   const { tripDetails, setTripDetails } = useContext(TripContext);
   const [loading, setLoading] = useState(false);
   const [places, setPlaces] = useState([]);
 
-  useEffect(() => {
-    if (!tripDetails.currentLocation) {
-      (async () => {
-        let { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== "granted") {
-          Alert.alert(
-            "Permission Denied",
-            "We need your location to show places around you"
-          );
-          return;
-        }
-        setLoading(true);
-        let location = await Location.getCurrentPositionAsync({});
-        const { latitude, longitude } = location.coords;
+  const fetchLocationAndPlaces = async () => {
+    try {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        Alert.alert(
+          "Permission Denied",
+          "We need your location to show places around you"
+        );
+        return;
+      }
+      setLoading(true);
 
-        let reverseGeocode = await Location.reverseGeocodeAsync({
-          latitude,
-          longitude,
-        });
+      let location = await Location.getCurrentPositionAsync({});
+      const { latitude, longitude } = location.coords;
 
-        if (reverseGeocode.length > 0) {
-          const { city, country } = reverseGeocode[0];
-          const cityName = `${city || "Unknown City"}, ${
-            country || "Unknown Country"
-          }`;
+      console.log("User's current location:", latitude, longitude);
 
-          setTripDetails((prevDetails) => ({
-            ...prevDetails,
-            currentLocation: cityName,
-            currentLatitude: latitude,
-            currentLongitude: longitude,
-          }));
-        } else {
-          setTripDetails((prevDetails) => ({
-            ...prevDetails,
-            currentLocation: "Random city",
-            currentLatitude: latitude,
-            currentLongitude: longitude,
-          }));
-        }
-        fetchNearbyPlaces(latitude, longitude);
+      let reverseGeocode = await Location.reverseGeocodeAsync({
+        latitude,
+        longitude,
+      });
 
-        setLoading(false);
-      })();
+      if (reverseGeocode.length > 0) {
+        const { city, country } = reverseGeocode[0];
+        const cityName = `${city || "Unknown City"}, ${
+          country || "Unknown Country"
+        }`;
+
+        setTripDetails((prevDetails) => ({
+          ...prevDetails,
+          currentLocation: cityName,
+          currentLatitude: latitude,
+          currentLongitude: longitude,
+        }));
+      } else {
+        setTripDetails((prevDetails) => ({
+          ...prevDetails,
+          currentLocation: "Random city",
+          currentLatitude: latitude,
+          currentLongitude: longitude,
+        }));
+      }
+
+      await fetchNearbyPlaces(latitude, longitude);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      Toast.show({
+        type: "error",
+        text1: "Error fetching location: " + error.message,
+      });
     }
-  }, []);
+  };
 
   const fetchNearbyPlaces = async (latitude, longitude) => {
     try {
@@ -70,7 +78,8 @@ export default function Discover() {
       const response = await fetch(url);
       const data = await response.json();
       const placesData = data.results;
-      console.log("Fetched places: ", placesData);
+
+      console.log("Fetched places:", placesData);
 
       if (placesData && placesData.length > 0) {
         setPlaces(placesData);
@@ -88,6 +97,12 @@ export default function Discover() {
     }
   };
 
+  useFocusEffect(
+    useCallback(() => {
+      fetchLocationAndPlaces();
+    }, [])
+  );
+
   return (
     <View style={styles.container}>
       {loading ? (
@@ -102,7 +117,7 @@ export default function Discover() {
               }}
               style={{ width: 80, height: 80, marginTop: -40, marginLeft: 5 }}
               autoPlay
-              Loop
+              loop
             />
           </View>
 
@@ -122,46 +137,51 @@ export default function Discover() {
               }}
               title="You are here!"
             />
-            {places.map((place, index) => (
-              <Marker
-                key={index}
-                coordinate={{
-                  latitude: place.geometry.location.lat,
-                  longitude: place.geometry.location.lng,
-                }}
-                title={place.name}
-                description={place.vicinity}
-                icon={{ uri: place.icon }}
-              >
-                <Callout>
-                  <View style={styles.callout}>
-                    <Text style={AppStyles.extraSmallTitle}>{place.name}</Text>
-                    <Text style={AppStyles.extraSmallText}>
-                      {place.vicinity}
-                    </Text>
-                    <Text style={AppStyles.extraSmallText}>
-                      Rating: 🌟{place.rating} ({place.user_ratings_total}{" "}
-                      ratings)
-                    </Text>
-                    <Text style={AppStyles.extraSmallTextRed}>
-                      {place.opening_hours?.open_now ? "Open now" : "Closed"}
-                    </Text>
-                    <TouchableOpacity
-                      style={{
-                        alignItems: "flex-end",
-                      }}
-                      onPress={() =>
-                        Linking.openURL(
-                          `https://www.google.com/maps/place/?q=place_name:${place.name}`
-                        )
-                      }
-                    >
-                      <Ionicons name="navigate" size={20} color="black" />
-                    </TouchableOpacity>
-                  </View>
-                </Callout>
-              </Marker>
-            ))}
+            {places.map((place, index) => {
+              console.log(`Rendering marker for place: ${place.name}`);
+              return (
+                <Marker
+                  key={index}
+                  coordinate={{
+                    latitude: place.geometry.location.lat,
+                    longitude: place.geometry.location.lng,
+                  }}
+                  title={place.name}
+                  description={place.vicinity}
+                  icon={{ uri: place.icon }}
+                >
+                  <Callout>
+                    <View style={styles.callout}>
+                      <Text style={AppStyles.extraSmallTitle}>
+                        {place.name}
+                      </Text>
+                      <Text style={AppStyles.extraSmallText}>
+                        {place.vicinity}
+                      </Text>
+                      <Text style={AppStyles.extraSmallText}>
+                        Rating: 🌟{place.rating} ({place.user_ratings_total}{" "}
+                        ratings)
+                      </Text>
+                      <Text style={AppStyles.extraSmallTextRed}>
+                        {place.opening_hours?.open_now ? "Open now" : "Closed"}
+                      </Text>
+                      <TouchableOpacity
+                        style={{
+                          alignItems: "flex-end",
+                        }}
+                        onPress={() =>
+                          Linking.openURL(
+                            `https://www.google.com/maps/place/?q=place_name:${place.name}`
+                          )
+                        }
+                      >
+                        <Ionicons name="navigate" size={20} color="black" />
+                      </TouchableOpacity>
+                    </View>
+                  </Callout>
+                </Marker>
+              );
+            })}
           </MapView>
         </>
       ) : (
