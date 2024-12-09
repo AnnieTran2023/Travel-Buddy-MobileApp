@@ -136,9 +136,9 @@ export default function Discover() {
                 longitude: tripDetails.currentLongitude,
               }}
               title="You are here!"
+              pinColor="green"
             />
             {places.map((place, index) => {
-              console.log(`Rendering marker for place: ${place.name}`);
               return (
                 <Marker
                   key={index}
