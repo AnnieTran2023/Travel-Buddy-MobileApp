@@ -12,8 +12,7 @@ export default function ReviewTrip({ navigation }) {
       <ProgressBar progress={1} color="#6200b3" style={{ marginBottom: 20 }} />
       <Text style={AppStyles.title}>Just One Last Look!</Text>
       <Text style={AppStyles.text}>
-        Let's go over your trip details before Travel Buddy crafts your perfect
-        plan!
+        Let's go over your trip details before Travel Buddy crafts your plan!
       </Text>
 
       <Card style={styles.card}>
