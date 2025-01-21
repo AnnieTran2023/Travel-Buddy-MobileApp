@@ -24,7 +24,7 @@ Travel Buddy is a mobile application designed to help users plan and manage thei
 - **Accommodation Booking**: View and book accommodations for your trips.
 - **Transportation Management**: Manage transportation details for your trips.
 - **Profile Management**: View and update user profile information.
-- **Discover**: Explore nearby restaurants / attractions
+- **Discover**: Access user's current locations and explore nearby restaurants / attractions
 - **Google API Integration**: Fetch place images and auto-complete suggestions using Google API.
 - **Gemini Model Integration**: Generate detailed travel plans including transportation, accommodation, and places to visit based on user input.
 
